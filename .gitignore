@@ -88,3 +88,5 @@ Thumbs.db
 
 # compiled templates
 src/app/homepage/pages/**/*.html
+
+.env

@@ -15,7 +15,7 @@ export class MovieService {
         return this.movieRepository.find({relations: ['genres']});
     }
 
-    async findOne(id): Promise<Movie> {
+    async findOne(id: number): Promise<Movie> {
         return this.movieRepository.findOne(id);
     }
 

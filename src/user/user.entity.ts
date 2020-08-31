@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, BeforeInsert } from "typeorm/index";
+import {Entity, PrimaryGeneratedColumn, Column, Unique, BeforeInsert, OneToMany} from "typeorm/index";
 import * as bcrypt from "bcrypt";
+import {WatchedMovie} from "src/watched.movie/watched.movie.entity";
 
 @Entity()
 export class User {
@@ -18,8 +19,12 @@ export class User {
     @Column({unique: true})
     password: string;
 
+    @OneToMany(type => WatchedMovie, watched_movie => watched_movie.user)
+    watched_movies: WatchedMovie[];
+
+
     @BeforeInsert()
-    hash_password(): void{
+    hash_password(): void {
         const salt = bcrypt.genSaltSync();
         this.password = bcrypt.hashSync(this.password, salt);
     }

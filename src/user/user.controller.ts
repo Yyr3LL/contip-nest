@@ -1,12 +1,17 @@
-import {Body, Controller, Get, Post, Param} from '@nestjs/common';
-import { UserService } from './user.service';
-import { User } from './user.entity';
+import {Body, Controller, Get, Post, Param, Request, UseGuards} from '@nestjs/common';
+import {UserService} from './user.service';
+import {User} from './user.entity';
+import {JwtAuthGuard} from '../auth/jwt-auth.guards';
+import {AuthService} from 'src/auth/auth.service';
 
 
 @Controller('auth')
 export class UserController {
 
-    constructor(private userService: UserService) {}
+    constructor(
+        private userService: UserService,
+        private authService: AuthService
+    ) {}
 
     @Post('signup')
     register(@Body() body): Promise<User> {
@@ -14,8 +19,14 @@ export class UserController {
     }
 
     @Post('login')
-    logIn(@Body() body): Promise<boolean> {
-        return this.userService.authenticate(body);
+    async logIn(@Body() body): Promise<object> {
+        return await this.userService.authenticate(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get()
+    getUserInfo(@Request() req) {
+        return req.user;
     }
 
 }
