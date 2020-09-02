@@ -8,12 +8,12 @@ export class GenreController {
 
     constructor(private genreService: GenreService) {}
 
-    @Get('genre')
+    @Get()
     getGenreList(): Promise<Genre[]> {
         return this.genreService.findAll()
     }
 
-    @Post('genre')
+    @Post()
     createGenre(@Body() body): Promise<Genre> {
         return this.genreService.create(body)
     }

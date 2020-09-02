@@ -3,6 +3,7 @@ import {UserService} from './user.service';
 import {User} from './user.entity';
 import {JwtAuthGuard} from '../auth/jwt-auth.guards';
 import {AuthService} from 'src/auth/auth.service';
+import {CreateUserDto} from './create-user.dto';
 
 
 @Controller('auth')
@@ -14,7 +15,7 @@ export class UserController {
     ) {}
 
     @Post('signup')
-    register(@Body() body): Promise<User> {
+    register(@Body() body: CreateUserDto): Promise<User> {
         return this.userService.create(body);
     }
 

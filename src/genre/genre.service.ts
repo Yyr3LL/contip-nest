@@ -17,6 +17,10 @@ export class GenreService {
         return this.genreRepository.findOne(id);
     }
 
+    async findByIds(ids: number[]): Promise<Genre[]> {
+        return this.genreRepository.findByIds(ids);
+    }
+
     async create(body): Promise<Genre> {
         const toivo = this.genreRepository.create({
             name: body.name

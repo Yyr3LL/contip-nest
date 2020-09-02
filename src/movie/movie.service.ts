@@ -1,4 +1,4 @@
-import {Injectable, Inject} from '@nestjs/common';
+import {Injectable, Inject, HttpStatus, HttpException} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {Movie} from "./movie.entity";
 import {GenreService} from "../genre/genre.service";
@@ -16,14 +16,15 @@ export class MovieService {
     }
 
     async findOne(id: number): Promise<Movie> {
-        return this.movieRepository.findOne(id);
+        const toivo = await this.movieRepository.findOne(id, {relations: ['genres']});
+        if (!toivo) {
+            throw new HttpException('Movie not found', HttpStatus.NOT_FOUND)
+        }
+        return toivo;
     }
 
     async create(body): Promise<Movie> {
-        let genres = [];
-        for (let genre of body.genres) {
-            genres.push(await this.genreService.findOne(genre))
-        }
+        const genres = await this.genreService.findByIds(body.genres);
         const toivo = this.movieRepository.create({
             title: body.title,
             genres: genres
