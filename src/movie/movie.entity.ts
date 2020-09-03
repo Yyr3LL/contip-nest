@@ -1,6 +1,6 @@
 import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, OneToMany} from "typeorm";
 import {Genre} from "../genre/genre.entity";
-import { WatchedMovie } from "src/watched.movie/watched.movie.entity";
+import { WatchedMovie } from "../watched.movie/watched.movie.entity";
 
 @Entity()
 export class Movie {

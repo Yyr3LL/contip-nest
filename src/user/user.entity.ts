@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, Unique, BeforeInsert, OneToMany} from "typeorm/index";
 import * as bcrypt from "bcrypt";
-import {WatchedMovie} from "src/watched.movie/watched.movie.entity";
+import {WatchedMovie} from "../watched.movie/watched.movie.entity";
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class User {
@@ -16,6 +17,7 @@ export class User {
     @Column()
     isStaff: boolean;
 
+    @Exclude()
     @Column({unique: true})
     password: string;
 

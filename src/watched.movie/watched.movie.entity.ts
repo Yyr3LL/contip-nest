@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable, BeforeInsert} from "typeorm";
-import {User} from "src/user/user.entity";
-import { Movie } from "src/movie/movie.entity";
+import {User} from "../user/user.entity";
+import {Movie} from "../movie/movie.entity";
 
 @Entity()
 export class WatchedMovie {

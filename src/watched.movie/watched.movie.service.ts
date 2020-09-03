@@ -1,7 +1,7 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { WatchedMovie } from './watched.movie.entity';
 import { Repository } from 'typeorm';
-import { MovieService } from 'src/movie/movie.service';
+import { MovieService } from '../movie/movie.service';
 
 @Injectable()
 export class WatchedMovieService {

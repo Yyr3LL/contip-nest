@@ -2,7 +2,7 @@ import {Injectable, Inject, HttpStatus, HttpException} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {User} from "./user.entity";
 import * as bcrypt from "bcrypt";
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
@@ -13,16 +13,9 @@ export class UserService {
         private authService: AuthService
     ) {}
 
-    // async findOne(criteria: number | string): Promise<User> {
-    //     if (typeof criteria === 'string') 
-    //         return this.userRepository.find({username: criteria})[0];
-    //     else
-    //         return this.userRepository.findOne(criteria);
-    // }
-    
     async findOne(criteria): Promise <User> {
         const toivo = this.userRepository.findOne(criteria);
-        if (!toivo) 
+        if (toivo === undefined)
             throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         return toivo;
     }

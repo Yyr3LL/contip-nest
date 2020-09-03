@@ -1,7 +1,7 @@
 import {Controller, Post, Body, UseGuards, Request, Put, Delete} from '@nestjs/common';
 import {WatchedMovieService} from './watched.movie.service';
 import {WatchedMovie} from './watched.movie.entity';
-import {JwtAuthGuard} from 'src/auth/jwt-auth.guards';
+import {JwtAuthGuard} from '../auth/jwt-auth.guards';
 import {CreateUpdateWatchedMovieDto} from './create-update-watched-movie.dto';
 
 @Controller('watched_list')
