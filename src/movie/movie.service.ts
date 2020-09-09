@@ -2,11 +2,12 @@ import {Injectable, Inject, HttpStatus, HttpException} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {Movie} from "./movie.entity";
 import {GenreService} from "../genre/genre.service";
+import {InjectRepository} from '@nestjs/typeorm';
 
 @Injectable()
 export class MovieService {
     constructor(
-        @Inject('MOVIE_REPOSITORY')
+        @InjectRepository(Movie)
         private movieRepository: Repository<Movie>,
         private genreService: GenreService
     ) {}

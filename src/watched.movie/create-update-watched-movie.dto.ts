@@ -10,5 +10,5 @@ export class CreateUpdateWatchedMovieDto {
 
     @IsInt()
     @IsPositive()
-    movie: number;
+    movie_id: number;
 }

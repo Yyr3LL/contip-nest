@@ -1,13 +1,12 @@
-import { Module } from '@nestjs/common';
-import {DatabaseModule} from "../database/database.module";
-import {genreProviders} from "./genre.providers";
+import {Module} from '@nestjs/common';
 import {GenreService} from "./genre.service";
-import { GenreController } from './genre.controller';
+import {GenreController} from './genre.controller';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {Genre} from './genre.entity';
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [TypeOrmModule.forFeature([Genre])],
     providers: [
-        ...genreProviders,
         GenreService
     ],
     exports: [
